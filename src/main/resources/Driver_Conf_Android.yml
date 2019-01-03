@@ -1,0 +1,14 @@
+#!!只能写‘键值对’格式
+
+#android client driver
+Android_01:
+  automationName: UiAutomator2
+  platformName: Android
+  deviceName: UYT7N17C11006847 #华为mate10
+  appActivity: .activity.WelcomeActivity
+  appPackage: com.panda.videoliveplatform
+  newCommandTimeout: 1800
+  noReset: true
+
+#appium server host
+host: http://localhost:4723/wd/hub
