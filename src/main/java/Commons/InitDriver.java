@@ -1,6 +1,6 @@
 package Commons;
 
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.IOException;
 import java.net.URL;
@@ -15,10 +15,10 @@ public class InitDriver {
     private static class InitDriverHolder {
         private static final InitDriver INSTANCE = new InitDriver();
     }
-    public static AndroidDriver androidDriver;
+    public static AppiumDriver thisDriver;
 
     private InitDriver() {
-        YamlOps yamlOps = new YamlOps("..\\AutoUITest\\src\\main\\resources\\Driver_Conf_Android.yml");
+        YamlOps yamlOps = new YamlOps("..\\AutoUITest\\src\\main\\resources\\Driver_Conf.yml");
         try {
             Map<String, Object> content = yamlOps.getContent();
             LinkedHashMap driverInfo = (LinkedHashMap) content.get("Android_01");//System.out.print(driverinfo.getClass().getName());driverinfo 实际是java.util.LinkedHashMap类型
@@ -28,7 +28,7 @@ public class InitDriver {
             for (Map.Entry i : infos) {
                 caps.setCapability((String) i.getKey(), i.getValue());
             }
-            androidDriver = new AndroidDriver(new URL(driverHost), caps);
+            thisDriver = new AppiumDriver(new URL(driverHost), caps);
 
         } catch (IOException e) {
             LoggerConf.logobject.severe("获取配置文件内容异常");
