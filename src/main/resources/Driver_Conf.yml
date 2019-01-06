@@ -1,14 +1,15 @@
 #!!只能写‘键值对’格式
-
+#appium server host
+HOST: http://localhost:4723/wd/hub
 #android client driver
-Android_01:
+ANDROID_01:
   automationName: UiAutomator2
   platformName: Android
   deviceName: UYT7N17C11006847 #华为mate10
   appActivity: .activity.WelcomeActivity
-  appPackage: com.panda.videoliveplatform
+  appPackage: com.panda.videoliveplatform #pandatv Android观看端
   newCommandTimeout: 1800
   noReset: true
+#findelement隐试等待时间（秒）
+IMPLICITLYWAIT: 10
 
-#appium server host
-host: http://localhost:4723/wd/hub

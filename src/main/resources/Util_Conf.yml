@@ -1,13 +1,9 @@
 #!!只能写‘键值对’格式
+#查找元素显示等待时间（秒）
+WAITUTIL: 10
 
-#隐试等待时间（秒）
-implicitlyWait: 5
-
-#显示等待时间（秒）
-waitUtil: 10
-
-#失败重试次数
-retry: 3
+#后台运行app的时间
+BACKGROUNDTIME: 3
 
 #失败时截图保存路径
-imgpath: D:\coding\IdeaProjects\PandaTest\AutoUITest\output\
+IMGPATH: D:\coding\IdeaProjects\PandaTest\AutoUITest\output\
