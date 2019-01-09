@@ -38,7 +38,7 @@ public class InitDriver {
             thisDriver.manage().timeouts().implicitlyWait(implicitlyWaitTime, TimeUnit.SECONDS);
 
         } catch (IOException e) {
-            LoggerConf.logobject.severe("获取配置文件内容异常");
+            LoggerConf.logobject.severe("获取配置文件内容异常，初始化driver失败");
         }
     }
 

@@ -18,6 +18,7 @@ public class AppOperate {
     private int waitTime;
     private int backGroundTime;
     private String imagePath;
+    public enum Op{CLICK};//待补充
 
     public AppOperate(AppiumDriver<?> driver) {
         this.driver = driver;
@@ -40,7 +41,7 @@ public class AppOperate {
 
         if(element.matches("\\/\\/.*")){
             return driver.findElementByXPath(element);
-        }else if(element.matches("com.panda.videoliveplatform:id.*")){
+        }else if(element.matches("com.*")){
             return driver.findElementById(element);
         }else {
             return null;
@@ -51,7 +52,7 @@ public class AppOperate {
     /**
      * 等待元素加载，位置稳定后，准确操作
      */
-    public void exactOp(String element,String op){
+    public void exactOp(String element,Op op,Object ...args){
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
         int i= 0;
         while (true){
@@ -65,10 +66,16 @@ public class AppOperate {
             }
         }
         switch (op){
-            case "CLICK": locater(element).click();
+            case CLICK: locater(element).click();
         }
 
     }
+
+    /**
+     * 处理掉非预期弹框
+     */
+    public void closePopWindow(){}
+
 
 
     /**
