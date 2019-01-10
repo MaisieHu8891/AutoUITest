@@ -82,13 +82,6 @@ public class AppOperate {
     }
 
     /**
-     * 处理掉非预期弹框
-     */
-    public void closePopWindow() {
-    }
-
-
-    /**
      * 重启app，不清除缓存及数据
      */
     public void restartApp() {
