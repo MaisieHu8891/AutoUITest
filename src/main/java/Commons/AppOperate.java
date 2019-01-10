@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,14 +19,18 @@ public class AppOperate {
     private int waitTime;
     private int backGroundTime;
     private String imagePath;
-    public enum Op{CLICK};//待补充
+
+    //相对元素：点击，向上、下滑屏；向上、下、左右滚动；
+    public enum Op {
+        CLICK, UPorDOWN, SCROLLUP, SCROLLDOWN, SCROLLRIGHT, SCROLLLEFT
+    }
 
     public AppOperate(AppiumDriver<?> driver) {
         this.driver = driver;
         YamlOps utilConf = new YamlOps("..\\AutoUITest\\src\\main\\resources\\Util_Conf.yml");
         try {
             Map<String, Object> utilContent = utilConf.getContent();
-            waitTime =(int) utilContent.get("WAITUTIL");
+            waitTime = (int) utilContent.get("WAITUTIL");
             backGroundTime = (int) utilContent.get("BACKGROUNDTIME");
             imagePath = (String) utilContent.get("IMGPATH");
         } catch (IOException e) {
@@ -37,13 +42,13 @@ public class AppOperate {
     /**
      * 封装定位方法
      */
-    public WebElement locater(String element){
+    public WebElement locater(String element) {
 
-        if(element.matches("\\/\\/.*")){
+        if (element.matches("\\/\\/.*")) {
             return driver.findElementByXPath(element);
-        }else if(element.matches("com.*")){
+        } else if (element.matches("com.*")) {
             return driver.findElementById(element);
-        }else {
+        } else {
             return null;
         }
 
@@ -52,21 +57,26 @@ public class AppOperate {
     /**
      * 等待元素加载，位置稳定后，准确操作
      */
-    public void exactOp(String element,Op op,Object ...args){
-        WebDriverWait wait = new WebDriverWait(driver,waitTime);
-        int i= 0;
-        while (true){
-            int local= wait.until(ExpectedConditions.elementToBeClickable(locater(element))).getLocation().hashCode();
-            if(i != local ){
+    public void exactOp(String element, Op op, Object... args) {
+        WebDriverWait wait = new WebDriverWait(driver, waitTime);
+        int i = 0;
+        while (true) {
+            int local = wait.until(ExpectedConditions.elementToBeClickable(locater(element))).getLocation().hashCode();
+            if (i != local) {
                 LoggerConf.logobject.info(String.valueOf(local));
-                i=local;
+                i = local;
                 continue;
-            }else {
+            } else {
                 break;
             }
         }
-        switch (op){
-            case CLICK: locater(element).click();
+        TouchActions action = new TouchActions(driver);
+        switch (op) {
+            case CLICK:
+                locater(element).click();
+            case UPorDOWN:
+                action.flick(locater(element), 0, (int)args[0], 0);
+                action.perform();
         }
 
     }
@@ -74,8 +84,8 @@ public class AppOperate {
     /**
      * 处理掉非预期弹框
      */
-    public void closePopWindow(){}
-
+    public void closePopWindow() {
+    }
 
 
     /**
@@ -101,7 +111,7 @@ public class AppOperate {
     /**
      * 在后台运行app一段时间
      */
-    public void backGroundRun(){
+    public void backGroundRun() {
         driver.runAppInBackground(Duration.ofSeconds(backGroundTime));
     }
 
@@ -110,7 +120,7 @@ public class AppOperate {
      */
     public void getScreenImage() {
         File file = new File(imagePath + System.currentTimeMillis() + ".jpeg");
-        File newFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File newFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(newFile, file);
         } catch (IOException e) {
