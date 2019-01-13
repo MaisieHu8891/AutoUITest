@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * 后台线程一直跑，检查到有弹窗，就notify, 同时带上要点击的元素
@@ -13,6 +14,7 @@ public class PopUpsCheck extends Observable implements Runnable {
 
     private AppiumDriver<?> driver;
     private ArrayList<String> windowBlack;
+    private Observer observer;
 
     public PopUpsCheck(AppiumDriver<?> driver){
         this.driver = driver;
@@ -23,6 +25,7 @@ public class PopUpsCheck extends Observable implements Runnable {
         } catch (IOException e) {
             LoggerConf.logobject.severe("获取Util_Conf配置文件内容失败");
         }
+        observer = new PopUpsOperate();
     }
 
     public AppiumDriver<?> getDriver() {
@@ -34,10 +37,12 @@ public class PopUpsCheck extends Observable implements Runnable {
         for (String s : windowBlack){
             if (driver.findElementsByXPath(s) != null){
                 setChanged();
+                addObserver(observer);
                 notifyObservers(s);
             }
         }
         clearChanged();
+        deleteObserver(observer);
 
     }
 }
