@@ -1,4 +1,4 @@
-package Commons;
+package commons;
 
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.io.FileUtils;
@@ -36,13 +36,12 @@ public class AppOperate {
         } catch (IOException e) {
             LoggerConf.logobject.severe("获取Util_Conf配置文件内容失败");
         }
-
     }
 
     /**
      * 封装定位方法
      */
-    public WebElement locater(String element) {
+    public WebElement locateElement(String element) {
 
         if (element.matches("\\/\\/.*")) {
             return driver.findElementByXPath(element);
@@ -57,11 +56,11 @@ public class AppOperate {
     /**
      * 等待元素加载，位置稳定后，准确操作
      */
-    public void exactOp(String element, Op op, Object... args) {
+    public void exactOp(WebElement webElement, Op op, Object... args) {
         WebDriverWait wait = new WebDriverWait(driver, waitTime);
         int i = 0;
         while (true) {
-            int local = wait.until(ExpectedConditions.elementToBeClickable(locater(element))).getLocation().hashCode();
+            int local = wait.until(ExpectedConditions.elementToBeClickable(webElement)).getLocation().hashCode();
             if (i != local) {
                 LoggerConf.logobject.info(String.valueOf(local));
                 i = local;
@@ -73,9 +72,9 @@ public class AppOperate {
         TouchActions action = new TouchActions(driver);
         switch (op) {
             case CLICK:
-                locater(element).click();
+                webElement.click();
             case UPorDOWN:
-                action.flick(locater(element), 0, (int)args[0], 0);
+                action.flick(webElement, 0, (int)args[0], 0);
                 action.perform();
         }
 
@@ -120,5 +119,7 @@ public class AppOperate {
             LoggerConf.logobject.severe("截图失败");
         }
     }
+
+
 
 }

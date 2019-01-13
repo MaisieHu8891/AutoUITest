@@ -7,3 +7,9 @@ BACKGROUNDTIME: 3
 
 #失败时截图保存路径
 IMGPATH: D:\coding\IdeaProjects\PandaTest\AutoUITest\output\
+
+#预期外的弹窗--约定此处只用xpath去定位
+WINDOW_BLACK:
+  - //*[@text='跳过']
+  - //*[@text='烦，下次说']
+  - //*[@text='算了']

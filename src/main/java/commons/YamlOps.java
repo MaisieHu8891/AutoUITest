@@ -1,4 +1,4 @@
-package Commons;
+package commons;
 
 import org.yaml.snakeyaml.Yaml;
 import java.io.*;

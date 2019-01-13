@@ -1,4 +1,4 @@
-package Commons;
+package commons;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;

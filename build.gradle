@@ -19,5 +19,4 @@ dependencies {
     compile group: 'org.apache.maven.plugins', name: 'maven-surefire-plugin', version: '2.22.1'
     // https://mvnrepository.com/artifact/org.yaml/snakeyaml
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.23'
-
 }

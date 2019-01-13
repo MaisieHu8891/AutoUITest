@@ -1,13 +1,15 @@
-import Commons.AppOperate;
-import Data.DriverData;
+import commons.AppOperate;
+import data.DriverData;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TmpTest {
     @Test(dataProvider = "driver", dataProviderClass = DriverData.class)
     public void t(AppiumDriver<?> driver) {
         AppOperate appOperate = new AppOperate(driver);
-        appOperate.exactOp("//*[@text='首页']", AppOperate.Op.CLICK);
+        WebElement shouye = appOperate.locateElement("//*[@text='首页']");
+        appOperate.exactOp(shouye, AppOperate.Op.CLICK);
 
     }
 }

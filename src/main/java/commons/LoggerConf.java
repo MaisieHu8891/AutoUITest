@@ -1,4 +1,4 @@
-package Commons;
+package commons;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
