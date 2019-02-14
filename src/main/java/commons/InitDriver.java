@@ -25,7 +25,7 @@ public class InitDriver {
         YamlOps driverConf = new YamlOps("..\\AutoUITest\\src\\main\\resources\\Driver_Conf.yml");
         try {
             Map<String, Object> driverContent = driverConf.getContent();
-            LinkedHashMap driverInfo = (LinkedHashMap) driverContent.get("ANDROID_01");//System.out.print(driverinfo.getClass().getName());driverinfo 实际是java.util.LinkedHashMap类型
+            LinkedHashMap driverInfo = (LinkedHashMap) driverContent.get("ANDROID_emu01");//System.out.print(driverinfo.getClass().getName());driverinfo 实际是java.util.LinkedHashMap类型
             String driverHost = (String) driverContent.get("HOST");
             int implicitlyWaitTime = (int) driverContent.get("IMPLICITLYWAIT");
 

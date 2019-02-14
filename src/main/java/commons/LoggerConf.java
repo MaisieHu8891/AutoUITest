@@ -21,7 +21,7 @@ public class LoggerConf {
         logobject.setLevel(defaultlevel);
         FileHandler fh = null;
         try {
-            fh = new FileHandler("..\\AutoUITest\\output\\ProjectLogFile.log");
+            fh = new FileHandler("..\\AutoUITest\\out\\ProjectLogFile.log");
         } catch (IOException e) {
             e.printStackTrace();
         }

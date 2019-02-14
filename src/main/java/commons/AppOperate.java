@@ -22,7 +22,7 @@ public class AppOperate {
 
     //相对元素：点击，向上、下滑屏；向上、下、左右滚动；
     public enum Op {
-        CLICK, UPorDOWN, SCROLLUP, SCROLLDOWN, SCROLLRIGHT, SCROLLLEFT
+        CLICK, SCROLLUP, SCROLLDOWN, SCROLLRIGHT, SCROLLLEFT
     }
 
     public AppOperate(AppiumDriver<?> driver) {
@@ -69,13 +69,9 @@ public class AppOperate {
                 break;
             }
         }
-        TouchActions action = new TouchActions(driver);
         switch (op) {
             case CLICK:
                 webElement.click();
-            case UPorDOWN:
-                action.flick(webElement, 0, (int)args[0], 0);
-                action.perform();
         }
 
     }

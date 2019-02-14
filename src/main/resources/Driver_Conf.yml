@@ -10,6 +10,13 @@ ANDROID_01:
   appPackage: com.panda.videoliveplatform #pandatv Android观看端
   newCommandTimeout: 1800
   noReset: true
+ANDROID_emu01:
+  automationName: UiAutomator2
+  platformName: Android
+  deviceName: 192.168.52.102:5555 #模拟器api26
+  appActivity: .activity.WelcomeActivity
+  appPackage: com.panda.videoliveplatform #pandatv Android观看端
+  newCommandTimeout: 1800
+  noReset: true
 #findelement隐试等待时间（秒）
 IMPLICITLYWAIT: 10
-
