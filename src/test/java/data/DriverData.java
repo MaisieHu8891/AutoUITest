@@ -1,6 +1,6 @@
 package data;
 
-import commons.InitDriver;
+import drivers.InitDriver;
 import io.appium.java_client.AppiumDriver;
 import org.testng.annotations.DataProvider;
 

@@ -1,0 +1,35 @@
+---
+Appium:
+ #appium server host
+  HOST: http://localhost:4723/wd/hub
+ #android client driver
+  ANDROID_01:
+    automationName: UiAutomator2
+    platformName: Android
+    deviceName: UYT7N17C11006847 #华为mate10
+    appActivity: .activity.WelcomeActivity
+    appPackage: com.panda.videoliveplatform #pandatv Android观看端
+    newCommandTimeout: 1800
+    noReset: true
+  ANDROID_emu01:
+    automationName: UiAutomator2
+    platformName: Android
+    deviceName: 192.168.175.101:5555 #模拟器api26
+    appActivity: .activity.WelcomeActivity
+    appPackage: com.panda.videoliveplatform #pandatv Android观看端
+    newCommandTimeout: 1800
+    noReset: true
+ #findelement隐试等待时间（秒）
+  IMPLICITLYWAIT: 10
+PandaAndroid:
+  #查找元素显示等待时间（秒）
+  WAITUTIL: 10
+  #后台运行app的时间
+  BACKGROUNDTIME: 3
+  #失败时截图保存路径
+  IMGPATH: D:\coding\IdeaProjects\PandaTest\AutoUITest\output\
+  #预期外的弹窗--约定此处只用xpath去定位
+  WINDOW_BLACK:
+    - //*[@text='跳过']
+    - //*[@text='烦，下次说']
+    - //*[@text='算了']

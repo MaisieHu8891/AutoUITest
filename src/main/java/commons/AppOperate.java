@@ -1,5 +1,6 @@
 package commons;
 
+import drivers.GlobalConfig;
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -27,15 +28,11 @@ public class AppOperate {
 
     public AppOperate(AppiumDriver<?> driver) {
         this.driver = driver;
-        YamlOps utilConf = new YamlOps("..\\AutoUITest\\src\\main\\resources\\Util_Conf.yml");
-        try {
-            Map<String, Object> utilContent = utilConf.getContent();
-            waitTime = (int) utilContent.get("WAITUTIL");
-            backGroundTime = (int) utilContent.get("BACKGROUNDTIME");
-            imagePath = (String) utilContent.get("IMGPATH");
-        } catch (IOException e) {
-            LoggerConf.logobject.severe("获取Util_Conf配置文件内容失败");
-        }
+        GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
+
+            waitTime = globalConfig.pandaAndroidConfig.WAITUTIL;
+            backGroundTime = globalConfig.pandaAndroidConfig.BACKGROUNDTIME;
+            imagePath =  globalConfig.pandaAndroidConfig.IMGPATH;
     }
 
     /**

@@ -1,6 +1,8 @@
 package commons;
 
+import drivers.GlobalConfig;
 import io.appium.java_client.AppiumDriver;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,15 +18,12 @@ public class PopUpsCheck extends Observable implements Runnable {
     private ArrayList<String> windowBlack;
     private Observer observer;
 
-    public PopUpsCheck(AppiumDriver<?> driver){
+    public PopUpsCheck(AppiumDriver<?> driver) {
         this.driver = driver;
-        YamlOps utilConf = new YamlOps("..\\AutoUITest\\src\\main\\resources\\Util_Conf.yml");
-        try {
-            Map<String, Object> utilContent = utilConf.getContent();
-            windowBlack = (ArrayList<String>) utilContent.get("WINDOW_BLACK");
-        } catch (IOException e) {
-            LoggerConf.logobject.severe("获取Util_Conf配置文件内容失败");
-        }
+        GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
+
+        windowBlack = globalConfig.pandaAndroidConfig.WINDOW_BLACK;
+
         observer = new PopUpsOperate();
     }
 
@@ -34,8 +33,8 @@ public class PopUpsCheck extends Observable implements Runnable {
 
     @Override
     public void run() {
-        for (String s : windowBlack){
-            if (driver.findElementsByXPath(s) != null){
+        for (String s : windowBlack) {
+            if (driver.findElementsByXPath(s) != null) {
                 setChanged();
                 addObserver(observer);
                 notifyObservers(s);
