@@ -24,12 +24,12 @@ public class InitDriver {
     public static AppiumDriver<? extends WebElement> thisDriver;
 
     private InitDriver() {
-        GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
+        GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
         try {
 
-            HashMap<String, Object> android_emu01 = globalConfig.appiumConfig.ANDROID_emu01;
-            String driverHost = globalConfig.appiumConfig.HOST;
-            int implicitlyWaitTime = globalConfig.appiumConfig.IMPLICITLYWAIT;
+            HashMap<String, Object> android_emu01 = globalConfig.Appium.ANDROID_emu01;
+            String driverHost = globalConfig.Appium.HOST;
+            int implicitlyWaitTime = globalConfig.Appium.IMPLICITLYWAIT;
 
             Set<Map.Entry<String, Object>> infos = android_emu01.entrySet();
             DesiredCapabilities caps = new DesiredCapabilities();
