@@ -22,7 +22,7 @@ public class PopUpsCheck extends Observable implements Runnable {
         this.driver = driver;
         GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
 
-        windowBlack = globalConfig.pandaAndroidConfig.WINDOW_BLACK;
+        windowBlack = globalConfig.PandaAndroid.WINDOW_BLACK;
 
         observer = new PopUpsOperate();
     }

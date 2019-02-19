@@ -30,9 +30,9 @@ public class AppOperate {
         this.driver = driver;
         GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
 
-            waitTime = globalConfig.pandaAndroidConfig.WAITUTIL;
-            backGroundTime = globalConfig.pandaAndroidConfig.BACKGROUNDTIME;
-            imagePath =  globalConfig.pandaAndroidConfig.IMGPATH;
+            waitTime = globalConfig.PandaAndroid.WAITUTIL;
+            backGroundTime = globalConfig.PandaAndroid.BACKGROUNDTIME;
+            imagePath =  globalConfig.PandaAndroid.IMGPATH;
     }
 
     /**
