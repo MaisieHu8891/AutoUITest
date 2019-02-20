@@ -28,7 +28,7 @@ public class AppOperate {
 
     public AppOperate(AppiumDriver<?> driver) {
         this.driver = driver;
-        GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
+        GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
 
             waitTime = globalConfig.PandaAndroid.WAITUTIL;
             backGroundTime = globalConfig.PandaAndroid.BACKGROUNDTIME;
