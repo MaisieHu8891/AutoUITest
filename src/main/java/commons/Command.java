@@ -1,7 +1,5 @@
 package commons;
 
-import java.io.IOException;
-
 /**
  * 执行命令行，可用于adb logcat抓取崩溃log等
  */
@@ -17,15 +15,12 @@ public class Command {
      */
     public void exeCmd(){
         try {
-            Process p = Runtime.getRuntime().exec(cmd);
-            p.waitFor();
+            Runtime.getRuntime().exec(cmd);
             System.out.print(11);
         } catch (Exception e) {
             LoggerConf.logobject.severe("exeCmd异常");
             e.printStackTrace();
         }
-
     }
-
 
 }

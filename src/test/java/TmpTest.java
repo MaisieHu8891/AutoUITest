@@ -13,10 +13,4 @@ public class TmpTest {
         appOperate.exactOp(shouye, AppOperate.Op.CLICK);
 
     }
-
-    @Test(dataProvider = "driver", dataProviderClass = DriverData.class)
-    public void driverQuit(AppiumDriver<?> driver){
-        driver.quit();
-
-    }
 }
