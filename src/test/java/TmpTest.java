@@ -4,7 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-public class TmpTest {
+public class TmpTest extends BaseTest{
 
     @Test(dataProvider = "driver", dataProviderClass = DriverData.class)
     public void a(AppiumDriver<?> driver) {
