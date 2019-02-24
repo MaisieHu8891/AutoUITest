@@ -9,6 +9,7 @@ public class DriverData {
     public Object[][] driverData() {
         InitDriver.getInstance();
         AppiumDriver driver = InitDriver.thisDriver;
+        System.out.println(driver);
         return new Object[][]{
                 {driver}
         };

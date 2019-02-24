@@ -15,11 +15,11 @@ public class PopUpsCheck extends Observable implements Runnable {
     private AppiumDriver<?> driver;
     private ArrayList<String> windowBlack;
     private Observer observer;
-    private volatile boolean isCancel;
+    public static volatile boolean isCancel;
 
     public PopUpsCheck(AppiumDriver<?> driver) {
         this.driver = driver;
-        this.isCancel = false;
+        isCancel = false;
         GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
         windowBlack = globalConfig.PandaAndroid.WINDOW_BLACK;
         observer = new PopUpsOperate();
@@ -40,15 +40,8 @@ public class PopUpsCheck extends Observable implements Runnable {
                     notifyObservers(s);
                 }
             }
-
         }
-
-    }
-
-    public void cancel() {
-        isCancel = true;
         clearChanged();
         deleteObserver(observer);
     }
-}
 }
