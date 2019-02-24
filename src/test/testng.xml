@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AutoUITest">
-    <test  verbose="5" preserve-order="true" name="AutoUITest\src\main\test">
+    <test name="AutoUITest\src\main\test" verbose="5" preserve-order="true" >
         <classes>
             <class name="ResidentThreadsTest">
                 <methods>
