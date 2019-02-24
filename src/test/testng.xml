@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="AutoUITest" parallel="tests" thread-count="2">
-    <test  verbose="1" preserve-order="true" name="D:\coding\IdeaProjects\PandaTest\AutoUITest">
+<suite name="AutoUITest">
+    <test  verbose="5" preserve-order="true" name="AutoUITest\src\main\test">
         <classes>
+            <class name="ResidentThreadsTest">
+                <methods>
+                    <include name="residentThreads"></include>
+                    <include name="startCheckBlackWindows"></include>
+                    <include name="androidLogcatStart"></include>
+                </methods>
+            </class>
             <class name="TmpTest">
                 <methods>
-                    <include name="t"></include>
+                    <include name="someTest"></include>
                 </methods>
             </class>
-        </classes>
-    </test>
-    <test  verbose="1" preserve-order="true" name="OpBlackWindow">
-        <classes>
-            <class name="OpBlackWindow">
+            <class name="ResidentThreadsTest">
                 <methods>
-                    <include name="t"></include>
+                    <include name="stopCheckBlackWindows"></include>
+                    <include name="androidLogcatStop"></include>
+                </methods>
+            </class>
+            <class name="LastClear">
+                <methods>
+                    <include name="LastClear"></include>
                 </methods>
             </class>
         </classes>
     </test>
-
 </suite>
