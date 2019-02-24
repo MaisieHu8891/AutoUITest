@@ -1,26 +1,30 @@
-import drivers.InitDriver;
+
+import commons.PopUpsCheck;
+import drivers.AndroidELog;
 import io.appium.java_client.AppiumDriver;
 
 public class BaseTest {
-    AppiumDriver driver;
-    Thread androidLogThread;
+    private Thread androidLogThread;
+    private Thread popUpsCheckThread;
 
-    public AppiumDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(AppiumDriver driver) {
-        this.driver = driver;
-    }
 
     public Thread getAndroidLogThread() {
         return androidLogThread;
     }
 
-    public void setAndroidLogThread(Thread androidLogThread) {
-        this.androidLogThread = androidLogThread;
+    public void setAndroidLogThread() {
+        AndroidELog androidELog = new AndroidELog();
+        this.androidLogThread = new Thread(androidELog);
     }
-    //   InitDriver.getInstance();
-//   AppiumDriver driver = InitDriver.thisDriver;
+
+    public Thread getPopUpsCheckThread() {
+        return popUpsCheckThread;
+    }
+
+    public void setPopUpsCheckThread(AppiumDriver driver) {
+        PopUpsCheck popUpsCheck = new PopUpsCheck(driver);
+        this.popUpsCheckThread = new Thread(popUpsCheck);
+    }
+
 
 }
