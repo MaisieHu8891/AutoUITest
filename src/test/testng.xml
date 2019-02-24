@@ -5,25 +5,25 @@
         <classes>
             <class name="ResidentThreadsTest">
                 <methods>
-                    <include name="residentThreads"></include>
-                    <include name="startCheckBlackWindows"></include>
-                    <include name="androidLogcatStart"></include>
+                    <include name="residentThreads"/>
+                    <include name="startCheckBlackWindows"/>
+                    <include name="androidLogcatStart"/>
                 </methods>
             </class>
             <class name="TmpTest">
                 <methods>
-                    <include name="someTest"></include>
+                    <include name="someTest"/>
                 </methods>
             </class>
             <class name="ResidentThreadsTest">
                 <methods>
-                    <include name="stopCheckBlackWindows"></include>
-                    <include name="androidLogcatStop"></include>
+                    <include name="stopCheckBlackWindows"/>
+                    <include name="androidLogcatStop"/>
                 </methods>
             </class>
             <class name="LastClear">
                 <methods>
-                    <include name="LastClear"></include>
+                    <include name="LastClear"/>
                 </methods>
             </class>
         </classes>
