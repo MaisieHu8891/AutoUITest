@@ -20,7 +20,7 @@ public class PopUpsCheck extends Observable implements Runnable {
     public PopUpsCheck(AppiumDriver<?> driver) {
         this.driver = driver;
         isCancel = false;
-        GlobalConfig globalConfig = GlobalConfig.load("Global_Conf.yml");
+        GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
         windowBlack = globalConfig.PandaAndroid.WINDOW_BLACK;
         observer = new PopUpsOperate();
 

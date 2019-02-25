@@ -1,10 +1,12 @@
-import data.DriverData;
-import io.appium.java_client.AppiumDriver;
-import org.testng.annotations.Test;
+import commons.PopUpsCheck;
+import org.testng.annotations.AfterTest;
 
-public class LastClear {
-    @Test(dataProvider = "driver", dataProviderClass = DriverData.class)
-    public void quitDriver(AppiumDriver<?> driver) {
+public class LastClear extends BaseTest{
+    @AfterTest
+    public void quitDriverAndExitThreads() {
         driver.quit();
+        PopUpsCheck.isCancel = true;
+        popUpsCheckThread.interrupt();
+        androidLogThread.interrupt();
     }
 }

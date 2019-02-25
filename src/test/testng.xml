@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AutoUITest">
-    <test name="AutoUITest\src\main\test" verbose="5">
+    <test name="AutoUITest\src\main\test" verbose="10">
         <classes>
-            <class name="ResidentThreadsTest">
-                <methods>
-                    <include name="residentThreads"/>
-                    <include name="startCheckBlackWindows"/>
-                    <include name="androidLogcatStart"/>
-                </methods>
-            </class>
-            <class name="TmpTest">
-                <methods>
-                    <include name="someTest"/>
-                </methods>
-            </class>
-            <class name="ResidentThreadsTest">
-                <methods>
-                    <include name="stopCheckBlackWindows"/>
-                    <include name="androidLogcatStop"/>
-                </methods>
-            </class>
-            <class name="LastClear">
-                <methods>
-                    <include name="LastClear"/>
-                </methods>
-            </class>
+            <class name="StartResidentThreads"/>
+            <class name="TmpTest"/>
+            <class name="LastClear"/>
         </classes>
     </test>
 </suite>
