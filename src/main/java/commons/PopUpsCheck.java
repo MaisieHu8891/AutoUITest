@@ -16,11 +16,11 @@ public class PopUpsCheck extends Observable implements Runnable {
     private AppiumDriver<?> driver;
     private ArrayList<String> windowBlack;
     private Observer observer;
-    public static volatile boolean isCancel;
+    public static volatile boolean isCancel = false;
 
     public PopUpsCheck(AppiumDriver<?> driver) {
         this.driver = driver;
-        isCancel = false;
+//        isCancel = false;
         GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
         windowBlack = globalConfig.PandaAndroid.WINDOW_BLACK;
         observer = new PopUpsOperate();
@@ -33,8 +33,8 @@ public class PopUpsCheck extends Observable implements Runnable {
 
     @Override
     public void run() {
+        LoggerConf.logobject.info("停止检测黑名单弹框线程了吗？: "+String.valueOf(isCancel));
         while (!isCancel) {
-            LoggerConf.logobject.info(String.valueOf(isCancel));
             for (String s : windowBlack) {
                 try{
                     WebElement webElement = driver.findElementByXPath(s);
@@ -44,7 +44,7 @@ public class PopUpsCheck extends Observable implements Runnable {
                         notifyObservers(s);
                     }
                 }catch (Exception e){
-                    LoggerConf.logobject.warning(e.getMessage());
+                    LoggerConf.logobject.info(e.getMessage());
                 }
 
             }

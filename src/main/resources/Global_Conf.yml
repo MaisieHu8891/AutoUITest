@@ -23,7 +23,7 @@ PandaAndroid:
   WAITUTIL: 10 #查找元素显示等待时间（秒）
   BACKGROUNDTIME: 3 #后台运行app的时间
   IMGPATH: D:\coding\IdeaProjects\PandaTest\AutoUITest\output\ #失败时截图保存路径
-  WINDOW_BLACK: #预期外的弹窗--约定此处只用xpath去定位//*[starts-with(@text,'跳过')]
-    - //*[@text='跳过(2)']
+  WINDOW_BLACK: #预期外的弹窗--约定此处只用xpath去定位#- //*[starts-with(@text,'跳过')]
+    - //*[@text='跳过']
     - //*[@text='烦，下次说']
     - //*[@text='算了']
