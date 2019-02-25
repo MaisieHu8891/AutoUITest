@@ -33,8 +33,9 @@ public class PopUpsCheck extends Observable implements Runnable {
 
     @Override
     public void run() {
-        LoggerConf.logobject.info("停止检测黑名单弹框线程了吗？: "+String.valueOf(isCancel));
+
         while (!isCancel) {
+            LoggerConf.logobject.info("停止检测黑名单弹框线程了吗？: "+String.valueOf(isCancel));
             for (String s : windowBlack) {
                 try{
                     WebElement webElement = driver.findElementByXPath(s);
@@ -49,6 +50,7 @@ public class PopUpsCheck extends Observable implements Runnable {
 
             }
         }
+        LoggerConf.logobject.info("停止检测黑名单弹框线程了吗？: "+String.valueOf(isCancel));
         clearChanged();
         deleteObserver(observer);
     }
