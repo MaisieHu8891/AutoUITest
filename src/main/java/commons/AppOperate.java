@@ -27,10 +27,9 @@ public class AppOperate {
     public AppOperate(AppiumDriver<?> driver) {
         this.driver = driver;
         GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
-
-            waitTime = globalConfig.PandaAndroid.WAITUTIL;
-            backGroundTime = globalConfig.PandaAndroid.BACKGROUNDTIME;
-            imagePath =  globalConfig.PandaAndroid.IMGPATH;
+        waitTime = globalConfig.PandaAndroid.WAITUTIL;
+        backGroundTime = globalConfig.PandaAndroid.BACKGROUNDTIME;
+        imagePath = globalConfig.PandaAndroid.IMGPATH;
     }
 
     /**
@@ -110,7 +109,6 @@ public class AppOperate {
             LoggerConf.logobject.severe("截图失败");
         }
     }
-
 
 
 }

@@ -13,10 +13,10 @@ public class ResidentThreads {
     }
 
     private ResidentThreads() {
-        PopUpsCheck popUpsCheck = new PopUpsCheck(this.driver);
-        this.popUpsCheckThread = new Thread(popUpsCheck);
+        PopUpsCheck popUpsCheck = new PopUpsCheck(driver);
+        popUpsCheckThread = new Thread(popUpsCheck);
         AndroidELog androidELog = new AndroidELog();
-        this.androidLogThread = new Thread(androidELog);
+        androidLogThread = new Thread(androidELog);
     }
 
     public static final ResidentThreads getInstance(AppiumDriver<?> driver ) {

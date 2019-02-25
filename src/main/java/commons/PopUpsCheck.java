@@ -2,6 +2,7 @@ package commons;
 
 import drivers.GlobalConfig;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -33,12 +34,19 @@ public class PopUpsCheck extends Observable implements Runnable {
     @Override
     public void run() {
         while (!isCancel) {
+            LoggerConf.logobject.info(String.valueOf(isCancel));
             for (String s : windowBlack) {
-                if (driver.findElementsByXPath(s) != null) {
-                    setChanged();
-                    addObserver(observer);
-                    notifyObservers(s);
+                try{
+                    WebElement webElement = driver.findElementByXPath(s);
+                    if (webElement != null) {
+                        setChanged();
+                        addObserver(observer);
+                        notifyObservers(s);
+                    }
+                }catch (Exception e){
+                    LoggerConf.logobject.warning(e.getMessage());
                 }
+
             }
         }
         clearChanged();

@@ -16,7 +16,6 @@ public class Command {
     public void exeCmd(){
         try {
             Runtime.getRuntime().exec(cmd);
-            System.out.print(11);
         } catch (Exception e) {
             LoggerConf.logobject.severe("exeCmd异常");
             e.printStackTrace();

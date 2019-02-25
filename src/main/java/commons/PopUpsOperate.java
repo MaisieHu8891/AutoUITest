@@ -13,6 +13,7 @@ public class PopUpsOperate implements Observer {
             PopUpsCheck popUpsCheck = (PopUpsCheck)observable;
             AppiumDriver<?> driver = popUpsCheck.getDriver();
             driver.findElementByXPath((String)arg).click();
+            LoggerConf.logobject.info("BlackWindow Click: "+arg);
         }
 
     }
