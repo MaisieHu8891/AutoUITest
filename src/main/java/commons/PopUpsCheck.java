@@ -9,48 +9,39 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * 后台线程一直跑，检查到有弹窗，就notify, 同时带上要点击的元素
+ * 检查到有WINDOW_BLACK的弹框，就notify, 同时带上要点击的元素
  */
-public class PopUpsCheck extends Observable implements Runnable {
+public class PopUpsCheck extends Observable {
 
     private AppiumDriver<?> driver;
     private ArrayList<String> windowBlack;
     private Observer observer;
-    public static volatile boolean isCancel = false;
 
     public PopUpsCheck(AppiumDriver<?> driver) {
         this.driver = driver;
-//        isCancel = false;
         GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
         windowBlack = globalConfig.PandaAndroid.WINDOW_BLACK;
         observer = new PopUpsOperate();
-
     }
 
     public AppiumDriver<?> getDriver() {
         return driver;
     }
 
-    @Override
-    public void run() {
-
-        while (!isCancel) {
-            LoggerConf.logobject.info("停止检测黑名单弹框线程了吗？: "+String.valueOf(isCancel));
-            for (String s : windowBlack) {
-                try{
-                    WebElement webElement = driver.findElementByXPath(s);
-                    if (webElement != null) {
-                        setChanged();
-                        addObserver(observer);
-                        notifyObservers(s);
-                    }
-                }catch (Exception e){
-                    LoggerConf.logobject.info(e.getMessage());
+    public void check() {
+        for (String s : windowBlack) {
+            try {
+                WebElement webElement = driver.findElementByXPath(s);
+                if (webElement != null) {
+                    setChanged();
+                    addObserver(observer);
+                    notifyObservers(s);
                 }
-
+            } catch (Exception e) {
+                LoggerConf.logobject.info(e.getMessage());
             }
+
         }
-        LoggerConf.logobject.info("停止检测黑名单弹框线程了吗？: "+String.valueOf(isCancel));
         clearChanged();
         deleteObserver(observer);
     }

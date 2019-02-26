@@ -36,79 +36,84 @@ public class AppOperate {
      * 封装定位方法
      */
     public WebElement locateElement(String element) {
-
-        if (element.matches("\\/\\/.*")) {
-            return driver.findElementByXPath(element);
-        } else if (element.matches("com.*")) {
-            return driver.findElementById(element);
-        } else {
-            return null;
-        }
-
-    }
-
-    /**
-     * 等待元素加载，位置稳定后，准确操作
-     */
-    public void exactOp(WebElement webElement, Op op, Object... args) {
-        WebDriverWait wait = new WebDriverWait(driver, waitTime);
-        int i = 0;
-        while (true) {
-            int local = wait.until(ExpectedConditions.elementToBeClickable(webElement)).getLocation().hashCode();
-            if (i != local) {
-                LoggerConf.logobject.info(String.valueOf(local));
-                i = local;
-                continue;
-            } else {
-                break;
-            }
-        }
-        switch (op) {
-            case CLICK:
-                webElement.click();
-        }
-
-    }
-
-    /**
-     * 重启app，不清除缓存及数据
-     */
-    public void restartApp() {
-        driver.closeApp();
+        WebElement webElement = null;
         try {
-            driver.runAppInBackground(Duration.ofSeconds(1));
+            if (element.matches("\\/\\/.*")) {
+                webElement = driver.findElementByXPath(element);
+            } else if (element.matches("com.*")) {
+                webElement =  driver.findElementById(element);
+            }
+            return webElement;
         } catch (Exception e) {
-            LoggerConf.logobject.severe("无法启动app");
+            PopUpsCheck popUpsCheck = new PopUpsCheck(driver);
+            popUpsCheck.check();
+            return webElement;
         }
+
     }
 
-    /**
-     * 回到app首页-非星颜星秀
-     */
-    public void backToAppIndex() {
+/**
+ * 等待元素加载，位置稳定后，准确操作
+ */
+public void exactOp(WebElement webElement,Op op,Object...args){
+        WebDriverWait wait=new WebDriverWait(driver,waitTime);
+        int i=0;
+        while(true){
+        int local=wait.until(ExpectedConditions.elementToBeClickable(webElement)).getLocation().hashCode();
+        if(i!=local){
+        LoggerConf.logobject.info(String.valueOf(local));
+        i=local;
+        continue;
+        }else{
+        break;
+        }
+        }
+        switch(op){
+        case CLICK:
+        webElement.click();
+        }
+
+        }
+
+/**
+ * 重启app，不清除缓存及数据
+ */
+public void restartApp(){
+        driver.closeApp();
+        try{
+        driver.runAppInBackground(Duration.ofSeconds(1));
+        }catch(Exception e){
+        LoggerConf.logobject.severe("无法启动app");
+        }
+        }
+
+/**
+ * 回到app首页-非星颜星秀
+ */
+public void backToAppIndex(){
         //while (driver.findElementsByXPath())
 
-    }
-
-    /**
-     * 在后台运行app一段时间
-     */
-    public void backGroundRun() {
-        driver.runAppInBackground(Duration.ofSeconds(backGroundTime));
-    }
-
-    /**
-     * 截屏
-     */
-    public void getScreenImage() {
-        File file = new File(imagePath + System.currentTimeMillis() + ".jpeg");
-        File newFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(newFile, file);
-        } catch (IOException e) {
-            LoggerConf.logobject.severe("截图失败");
         }
-    }
+
+/**
+ * 在后台运行app一段时间
+ */
+public void backGroundRun(){
+        driver.runAppInBackground(Duration.ofSeconds(backGroundTime));
+        }
+
+/**
+ * 截屏
+ */
+public void getScreenImage(){
+        File file=new File(imagePath+System.currentTimeMillis()+".jpeg");
+        File newFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try{
+        FileUtils.copyFile(newFile,file);
+        }catch(IOException e){
+        LoggerConf.logobject.severe("截图失败");
+        }
+        }
 
 
-}
+        }

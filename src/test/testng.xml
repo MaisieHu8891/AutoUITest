@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AutoUITest">
-    <test name="AutoUITest\src\main\test" verbose="10">
+    <test name="AutoUITest\src\main\test" verbose="5">
         <classes>
-            <class name="StartResidentThreads"/>
+            <class name="StartResidentTest"/>
             <class name="TmpTest"/>
             <class name="LastClear"/>
         </classes>
