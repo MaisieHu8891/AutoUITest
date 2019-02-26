@@ -9,23 +9,18 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * 检查到有WINDOW_BLACK的弹框，就notify, 同时带上要点击的元素
+ * 检查到有WINDOW_BLACK的弹框，有就点击的元素
  */
-public class PopUpsCheck extends Observable {
+public class PopWindowsCheck {
 
     private AppiumDriver<?> driver;
     private ArrayList<String> windowBlack;
-    private Observer observer;
 
-    public PopUpsCheck(AppiumDriver<?> driver) {
+    public PopWindowsCheck(AppiumDriver<?> driver) {
         this.driver = driver;
         GlobalConfig globalConfig = GlobalConfig.load("/Global_Conf.yml");
         windowBlack = globalConfig.PandaAndroid.WINDOW_BLACK;
-        observer = new PopUpsOperate();
-    }
 
-    public AppiumDriver<?> getDriver() {
-        return driver;
     }
 
     public void check() {
@@ -33,16 +28,11 @@ public class PopUpsCheck extends Observable {
             try {
                 WebElement webElement = driver.findElementByXPath(s);
                 if (webElement != null) {
-                    setChanged();
-                    addObserver(observer);
-                    notifyObservers(s);
+                    driver.findElementByXPath(s).click();
                 }
             } catch (Exception e) {
-                LoggerConf.logobject.info(e.getMessage());
+                LoggerConf.logobject.info("检查黑名单弹框: "+e.getMessage());
             }
-
         }
-        clearChanged();
-        deleteObserver(observer);
     }
 }
