@@ -60,6 +60,7 @@ public class AppOperate {
         return webElement;
     }
 
+
     /**
      * 等待元素加载，位置稳定后，准确操作
      */
@@ -83,6 +84,14 @@ public class AppOperate {
             }
         }
     }
+
+    /**
+     * 根据相对坐标点击， 处理模态弹框需要
+     */
+    public void clickWithXY(WebElement parentElement,Integer x, Integer y){
+
+    }
+
 
     /**
      * 重启app，不清除缓存及数据
