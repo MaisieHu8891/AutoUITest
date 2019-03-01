@@ -1,12 +1,10 @@
-package commons;
+package util;
 
 import drivers.GlobalConfig;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * 检查到有WINDOW_BLACK的弹框，有就点击的元素

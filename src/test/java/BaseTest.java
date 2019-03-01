@@ -1,5 +1,5 @@
-import commons.AndroidELog;
-//import commons.ResidentThreads;
+import util.AndroidELog;
+//import util.ResidentThreads;
 import drivers.InitDriver;
 import io.appium.java_client.AppiumDriver;
 

@@ -1,7 +1,6 @@
-package commons;
+package util;
 
 import drivers.GlobalConfig;
-import drivers.InitDriver;
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
