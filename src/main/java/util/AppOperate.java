@@ -2,10 +2,12 @@ package util;
 
 import drivers.GlobalConfig;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -35,16 +37,16 @@ public class AppOperate {
     }
 
     /**
-     * 封装定位方法
+     * 手机端封装定位方法
      */
-    public WebElement locateElement(String element) {
-        WebElement webElement = null;
+    public MobileElement locateElement(String element) {
+        MobileElement mobileElement = null;
         for (int i = 1; i <= findTimes; i++) {
             try {
                 if (element.matches("\\/\\/.*")) {
-                    webElement = driver.findElementByXPath(element);
+                    mobileElement = (MobileElement) driver.findElementByXPath(element);
                 } else if (element.matches("com.*")) {
-                    webElement = driver.findElementById(element);
+                    mobileElement = (MobileElement) driver.findElementById(element);
                 }
             } catch (Exception e) {
                 LoggerConf.logobject.info("找不到" + element + "检查是否有黑名单窗口..." + i + "次");
@@ -52,22 +54,22 @@ public class AppOperate {
                 popUpsCheck.check();
             }
 
-            if (webElement != null) {
+            if (mobileElement != null) {
                 break;
             }
         }
-        return webElement;
+        return mobileElement;
     }
 
 
     /**
      * 等待元素加载，位置稳定后，准确操作
      */
-    public void exactOp(WebElement webElement, Op op, Object... args) {
+    public void exactOp(MobileElement mobileElement, Op op, Object... args) {
         WebDriverWait wait = new WebDriverWait(driver, waitTime);
         int i = 0;
-        while (webElement != null) {
-            int local = wait.until(ExpectedConditions.elementToBeClickable(webElement)).getLocation().hashCode();
+        while (mobileElement != null) {
+            int local = wait.until(ExpectedConditions.elementToBeClickable(mobileElement)).getLocation().hashCode();
             if (i != local) {
                 LoggerConf.logobject.info(String.valueOf(local));
                 i = local;
@@ -76,19 +78,28 @@ public class AppOperate {
                 break;
             }
         }
-        if (webElement != null) {
+        if (mobileElement != null) {
             switch (op) {
                 case CLICK:
-                    webElement.click();
+                    mobileElement.click();
             }
         }
     }
 
     /**
      * 根据相对坐标点击， 处理模态弹框需要
+     * 传参x= 实际元素x/屏幕总x   y=实际元素y/屏幕总y
+     * parentElement可以为null
      */
-    public void clickWithXY(WebElement parentElement,Integer x, Integer y){
-
+    public void clickWithXY(Integer x, Integer y, String parentElement){
+        x = x*driver.manage().window().getSize().width;
+        y = y*driver.manage().window().getSize().height;
+        if(parentElement!=null){
+            MobileElement mobileElement = locateElement(parentElement);
+            exactOp(mobileElement,Op.CLICK);
+        }
+        TouchAction action = new TouchAction(driver);
+        action.tap(PointOption.point(x,y));
     }
 
 
